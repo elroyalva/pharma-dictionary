@@ -1,0 +1,88 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Pharmacy_Dictionary.ResultsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    xmlns:viewModels="clr-namespace:Pharmacy_Dictionary.ViewModels"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="False">
+    
+    <UserControl.DataContext>
+        <viewModels:MainDataViewModel/>
+    </UserControl.DataContext>
+    
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="Pharma Dictionary" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="Search Results" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <telerikPrimitives:RadDataBoundListBox x:Name="result" ItemsSource="{Binding}" Margin="12,3,12,10">
+                <telerikPrimitives:RadDataBoundListBox.ItemTemplate>
+                    <DataTemplate>
+                        <telerikPrimitives:RadExpanderControl ExpandableContent="{Binding}" Content="{Binding}" BorderThickness="0, 3, 0, 0" BorderBrush="{StaticResource PhoneSubtleBrush}">
+                            <telerikPrimitives:RadExpanderControl.ContentTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,4,0,12">
+                                        <TextBlock Grid.Row="1" Text="{Binding id}" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="Segoe WP SemiLight" Foreground="{StaticResource PhoneForegroundBrush}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </telerikPrimitives:RadExpanderControl.ContentTemplate>
+                            <telerikPrimitives:RadExpanderControl.ExpandableContentTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,0,0,36">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <!--<Image Width="87" Height="87" Source="{Binding ImageThumbnailSource}"/>-->
+                                        <TextBlock Margin="12,-6,12,0" Grid.Column="1" Text="{Binding def}" TextWrapping="Wrap" FontFamily="Segoe WP" FontSize="{StaticResource PhoneFontSizeNormal}" Foreground="{StaticResource PhoneForegroundBrush}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </telerikPrimitives:RadExpanderControl.ExpandableContentTemplate>
+                        </telerikPrimitives:RadExpanderControl>
+                    </DataTemplate>
+                </telerikPrimitives:RadDataBoundListBox.ItemTemplate>
+            </telerikPrimitives:RadDataBoundListBox>
+            <!--<TextBlock HorizontalAlignment="Left" Margin="12,361,0,0" TextWrapping="Wrap" Text="Suggestions" FontSize="{StaticResource PhoneFontSizeLarge}" VerticalAlignment="Top" RenderTransformOrigin="-0.878,1.22" Height="52" Width="432"/>
+            <phone:LongListSelector Margin="0,418,0,0" ItemsSource="{Binding}"  x:Name="sugg">
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="12,2,0,4" Height="50" Width="432">
+                            <StackPanel Width="311" Margin="8,-7,0,0">
+                                <TextBlock Text="{Binding suggestion}" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </phone:LongListSelector.ItemTemplate>
+
+            </phone:LongListSelector>-->
+        </Grid>
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/LeftArrow.png" Text="Back" Click="ApplicationBarIconButton_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/med.png" Text="Med search" Click="Navtomed"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/dict.png" Text="gen search" Click="Navtomed"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="About" Click="ApplicationBarMenuItem_Click" />
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>
